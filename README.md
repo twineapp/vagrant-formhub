@@ -71,6 +71,17 @@ Virtual OS: Ubuntu 12.04 (Precise) x64, with Packages:
 - mysql username:password are root:pwd
 - rockmongo username:password are admin:admin
 
-## Deployment To Production
-- do search and replace for "formhub.localhost" => "formhub.server.com"
-- deploy puppet with one of these methods: http://puppetlabs.com/blog/deploying-puppet-in-client-server-standalone-and-massively-scaled-environments
+## Deployment via Standalone method (details: http://puppetlabs.com/blog/deploying-puppet-in-client-server-standalone-and-massively-scaled-environments)
+- ssh into a clean install of Ubuntu 12.04 (Precise) x64
+- sudo su
+- apt-get update
+- apt-get install git puppet
+- mkdir /shared_folder/
+- cd /shared_folder/
+- git clone https://github.com/twineapp/vagrant-formhub.git
+- cd vagrant-formhub/
+- nano puppet/manifests/formhub.pp (to uncomment the list of imports)
+- puppet apply puppet/manifests/formhub.pp
+- nano src/scripts/server.setup.sh (to edit the config settings for server)
+- src/scripts/server.setup.sh (to deploy the config settings for server)
+
