@@ -1,0 +1,17 @@
+<VirtualHost *:80>
+	ServerAdmin admin@twine
+
+        ServerName enketo.formhub.localhost
+        ServerAlias *.enketo.formhub.localhost
+
+        DocumentRoot /var/www/enketo/public
+        <Directory /var/www/enketo/public>
+		AllowOverride All
+		Order allow,deny
+		allow from all
+	</Directory>
+
+	ErrorLog /var/log/apache2/error.log
+	LogLevel warn
+	CustomLog /var/log/apache2/access.log combined
+</VirtualHost>

@@ -1,0 +1,17 @@
+<VirtualHost *:80>
+	ServerAdmin admin@twine
+
+        ServerName formhub.localhost
+
+        Alias /static/ /var/www/formhub/static/
+        <Directory /var/www/formhub/static>
+            AllowOverride All
+            Order allow,deny
+            Allow from all
+        </Directory>
+        WSGIScriptAlias / /var/www/formhub/formhub.wsgi
+
+	ErrorLog /var/log/apache2/error.log
+	LogLevel warn
+	CustomLog /var/log/apache2/access.log combined
+</VirtualHost>

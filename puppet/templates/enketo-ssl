@@ -1,0 +1,22 @@
+<VirtualHost *:443>
+	ServerAdmin admin@twine
+
+        ServerName enketo.formhub.localhost:443
+        ServerAlias *.enketo.formhub.localhost:443
+
+
+        SSLEngine on
+        SSLCertificateFile /etc/ssl/certs/ssl-cert-snakeoil.pem
+        SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+
+        DocumentRoot /var/www/enketo/public
+        <Directory /var/www/enketo/public>
+		AllowOverride All
+		Order allow,deny
+		allow from all
+	</Directory>
+
+	ErrorLog /var/log/apache2/error.log
+	LogLevel warn
+	CustomLog /var/log/apache2/access.log combined
+</VirtualHost>
