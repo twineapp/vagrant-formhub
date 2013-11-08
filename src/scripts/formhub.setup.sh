@@ -38,4 +38,5 @@ cp /shared_folder/vagrant-formhub/puppet/templates/formhub.wsgi /var/www/formhub
 cp /shared_folder/vagrant-formhub/puppet/templates/formhub /etc/apache2/sites-available/formhub
 a2ensite formhub
 
-chmod -R 777 /var/www/formhub/
+mkdir /var/www/formhub/media
+chmod -R 777 /var/www/formhub/media
