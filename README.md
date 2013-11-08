@@ -81,7 +81,6 @@ Virtual OS: Ubuntu 12.04 (Precise) x64, with Packages:
 - cd /shared_folder/
 - git clone https://github.com/twineapp/vagrant-formhub.git
 - cd vagrant-formhub/
-- chmod +x src/scripts/*.sh
 - nano puppet/manifests/formhub.pp (to uncomment the list of imports)
 - puppet apply puppet/manifests/formhub.pp
 - nano src/scripts/server.setup.sh (to edit the config settings for server)
