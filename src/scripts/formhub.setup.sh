@@ -28,9 +28,8 @@ python manage.py collectstatic --noinput
 
 echo "Formhub: Configure the celery daemon:"
 cp /var/www/formhub/extras/celeryd/etc/init.d/celeryd /etc/init.d/celeryd
-cp /var/www/formhub/extras/celeryd/etc/default/celeryd /etc/default/celeryd
-sed 's,<username>,vagrant,g' /etc/default/celeryd > tmpfile && mv tmpfile /etc/default/celeryd
-python manage.py celeryd_multi start
+cp /shared_folder/vagrant-formhub/puppet/templates/celeryd /etc/default/celeryd
+/etc/init.d/celeryd start
 echo "127.0.0.1       formhub.localhost" >> /etc/hosts
 
 
