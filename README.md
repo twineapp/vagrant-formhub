@@ -50,6 +50,15 @@ Virtual OS: Ubuntu 12.04 (Precise) x64, with Packages:
     - add nameserver entry at System Preferences -> Network -> Advanced -> DNS
         - nameserver 127.0.0.1 (as first entry)
         - your other DNS name servers
+    
+    **Windows**
+    - install Acrylic http://mayakron.altervista.org/wikibase/show.php?id=AcrylicHome
+    - Setup Network Congiguration Settings http://mayakron.altervista.org/wikibase/show.php?id=AcrylicWindows8Configuration
+    - edit C:\Program Files (x86)\Acrylic DNS Proxy\AcrylicHosts.txt
+        - 192.168.50.5				formhub.localhost
+        - 192.168.50.5				enketo.formhub.localhost
+        - 192.168.50.5				*.enketo.formhub.localhost
+    - restart Acrylic Service from control panel
         
 6. View Formhub: http://formhub.localhost/
 7. View Enketo: https://enketo.formhub.localhost/
