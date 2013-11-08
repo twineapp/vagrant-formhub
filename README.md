@@ -72,6 +72,11 @@ Virtual OS: Ubuntu 12.04 (Precise) x64, with Packages:
 - rockmongo username:password are admin:admin
 - postgresql username:password are admin:pwd
 
+## VM URLs
+- http://192.168.50.5/phpmyadmin
+- http://192.168.50.5/rockmongo
+- http://192.168.50.5/phppgadmin
+
 ## Deployment via Standalone method (details: http://puppetlabs.com/blog/deploying-puppet-in-client-server-standalone-and-massively-scaled-environments)
 - ssh into a clean install of Ubuntu 12.04 (Precise) x64
 - sudo su
