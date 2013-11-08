@@ -42,7 +42,7 @@ class mongo
             command => 'echo "extension=mongo.so" >> /etc/php5/apache2/php.ini',
             require => Exec['pecl-mongo-install'],
     }
-    /*
+    
     exec
     {
         "wget-rockmongo":
@@ -50,14 +50,14 @@ class mongo
             timeout => 3600,
             creates =>  "/tmp/rockmongo-1.1.5.zip",
     }
-    */
+    
     package 
     { 
         "unzip":
             ensure  => present,
             require => Exec['apt-get update']
     }
-    /*
+    
     exec
     {
         "unzip-rockmongo":
@@ -65,5 +65,5 @@ class mongo
             timeout => 3600,
             require => [ Exec['wget-rockmongo'], Package["unzip"] ]
     }
-    */
+    
 }

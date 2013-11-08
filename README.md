@@ -70,6 +70,7 @@ Virtual OS: Ubuntu 12.04 (Precise) x64, with Packages:
 ## VM Passwords
 - mysql username:password are root:pwd
 - rockmongo username:password are admin:admin
+- postgresql username:password are admin:pwd
 
 ## Deployment via Standalone method (details: http://puppetlabs.com/blog/deploying-puppet-in-client-server-standalone-and-massively-scaled-environments)
 - ssh into a clean install of Ubuntu 12.04 (Precise) x64

@@ -4,6 +4,8 @@
 
 DOMAIN="example.com"
 MYSQL_PASSWORD="pwd"
+ROCKMONGO_PASSWORD="pwd"
+POSTGRESQL_PASSWORD="pwd"
 
 
 ### DO NOT EDIT BELOW THIS LINE ###
@@ -39,3 +41,13 @@ sed "s,pwd,$MYSQL_PASSWORD,g" $SEDFILE > tmpfile && mv tmpfile $SEDFILE
 
 SEDFILE="/var/www/formhub/formhub/preset/default_settings.py"
 sed "s,pwd,$MYSQL_PASSWORD,g" $SEDFILE > tmpfile && mv tmpfile $SEDFILE
+
+echo "CHANGING ROCKMONGO SETTINGS"
+
+SEDFILE="/var/www/rockmongo/config.php"
+sed 's,"admin";,"'$ROCKMONGO_PASSWORD'";,g' $SEDFILE > tmpfile && mv tmpfile $SEDFILE
+
+echo "CHANGING POSTGRESQL SETTINGS"
+
+sudo -u postgres psql -c "alter user admin with password '"$POSTGRESQL_PASSWORD"';"
+
