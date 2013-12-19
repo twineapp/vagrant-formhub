@@ -19,12 +19,12 @@ from staging_example import *  # get most settings from staging_example.py (whic
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'formhub',
-        'USER': 'root',
+        'USER': 'admin',
         'PASSWORD': 'pwd',
         'HOST': 'localhost',
-        'PORT': '3306',
+        'PORT': '',
     }
 }
 

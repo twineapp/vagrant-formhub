@@ -19,7 +19,8 @@ sudo ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib/
 echo "Formhub: Create a database and start server:"
 cp /shared_folder/vagrant-formhub/puppet/templates/settings.py /var/www/formhub/formhub/settings.py
 cp /shared_folder/vagrant-formhub/puppet/templates/default_settings.py /var/www/formhub/formhub/preset/default_settings.py
-mysql -u root -ppwd -e "create database formhub CHARACTER SET utf8";
+sudo -u postgres psql -c "create database formhub;"
+sudo -u postgres psql -c "grant all privileges on database formhub to admin;"
 python manage.py syncdb --noinput
 python manage.py migrate
 
