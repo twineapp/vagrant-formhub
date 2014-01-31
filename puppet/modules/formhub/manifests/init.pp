@@ -44,5 +44,12 @@ class formhub
                             Package['sendmail'] ]
     }
 
-
+    file 
+    { 
+        "/etc/apache2/sites-available/default":
+            ensure  => present,
+            source  => "/shared_folder/vagrant-formhub/puppet/templates/vhost",
+            require => [ Package["apache2"] ],
+            notify  => Service["apache2"]
+    }
 }
