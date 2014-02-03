@@ -1,2 +1,2 @@
 # These files are text and should be normalized (convert crlf => lf)
-*.sh        text
+*.sh        eol=lf
