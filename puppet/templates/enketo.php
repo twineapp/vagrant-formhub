@@ -1,19 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
- * Configuration file for all settings EXCEPT the database settings
- */
-
-/**
- * These are required for the geopoint widget to work in the forms. 
- * The first is for the Google Maps API v3 (fancy dynamic maps)
- * The second is for the Google Maps Static API (simple read-only maps)
- * Request your own here: https://developers.google.com/maps/signup
- */
-$config['google_maps_api_v3_key'] = "";
-$config['google_maps_static_api_key'] = "";
-
-/**
  * Leave empty if not using Google Analytics
  */
 $config['google_analytics_key'] = "";
@@ -32,6 +19,12 @@ $config['support_email'] = "support@formhub.org";
  * In the webform view this is the brand name shown (empty = enketo)
  */
 $config['brand'] = "";
+
+/**
+ * Array of themes that are included (only "formhub" is open-source). 
+ * The first theme in the array is the default.
+ */
+$config['themes'] = array( "formhub" );
 
 /**
  * OpenRosa servers that are allowed to connect

@@ -3,7 +3,7 @@
 a2enmod expires
 a2enmod ssl
 cd /var/www/
-rm -rf enketo/ ; git clone https://github.com/modilabs/enketo.git
+rm -rf enketo/ ; git clone https://github.com/twineapp/enketo.git
 cd enketo
 mysql -u root -ppwd -e "create database enketo";
 mysql -u root -ppwd --database=enketo < /shared_folder/vagrant-formhub/src/sql-enketo/instances.sql
@@ -14,13 +14,14 @@ git submodule init
 git submodule update
 
 echo "init and update the submodules for enketo-core"
-cd public/libraries/enketo-core
+cd public/lib/enketo-core
 git submodule init
 git submodule update
 cd /var/www/enketo
 
 #temp fix for missing column
 mysql -u root -ppwd --database=enketo -e "ALTER TABLE surveys ADD COLUMN last_accessed TIMESTAMP NULL";
+mysql -u root -ppwd --database=enketo -e "ALTER TABLE surveys ADD COLUMN theme varchar(255) NULL";
 
 sudo /etc/init.d/apache2 restart
 cp /shared_folder/vagrant-formhub/puppet/templates/enketo.php /var/www/enketo/Code_Igniter/application/config/enketo.php
@@ -30,6 +31,7 @@ echo "127.0.0.1       enketo.formhub.localhost" >> /etc/hosts
 
 npm install -g grunt-cli
 npm install
+gem install sass
 grunt
 
 cp /shared_folder/vagrant-formhub/puppet/templates/enketo /etc/apache2/sites-available/enketo
