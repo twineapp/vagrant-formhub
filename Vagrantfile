@@ -8,7 +8,7 @@ Vagrant.configure("2") do |config|
         inv_config.vm.provider :virtualbox do |vb|
             vb.customize ["modifyvm", :id, "--memory", 2048, "--cpus", 2]
         end
-        inv_config.ssh.max_tries = 360
+        #inv_config.ssh.max_tries = 360
         
         #inv_config.vm.network :forwarded_port, guest: 22, host: 2223
         #inv_config.vm.network :forwarded_port, guest: 80, host: 8081
@@ -17,13 +17,13 @@ Vagrant.configure("2") do |config|
 
         inv_config.vm.hostname = "formhub"
         
-        inv_config.vm.synced_folder "../", "/shared_folder/", :extra => "dmode=777,fmode=777"
+        inv_config.vm.synced_folder "../", "/shared_folder/"
 
         inv_config.vm.provision :puppet do |puppet|
             puppet.manifests_path = "puppet/manifests"
             puppet.manifest_file  = "formhub.pp"
             puppet.module_path = "puppet/modules"
-            #puppet.options = "--verbose --debug"
+            puppet.options = "--verbose --debug"
             #puppet.options = "--verbose"
         end
 

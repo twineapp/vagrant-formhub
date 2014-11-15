@@ -3,20 +3,22 @@
 a2enmod expires
 a2enmod ssl
 cd /var/www/
-rm -rf enketo/ ; git clone https://github.com/twineapp/enketo.git
+#rm -rf enketo/ ; git clone https://github.com/twineapp/enketo.git
+rm -rf enketo/ ; git clone https://github.com/enketo/enketo-legacy.git
+mv enketo-legacy enketo
+
 cd enketo
+#mysql -u root -ppwd -e "drop database enketo";
 mysql -u root -ppwd -e "create database enketo";
 mysql -u root -ppwd --database=enketo < /shared_folder/vagrant-formhub/src/sql-enketo/instances.sql
 mysql -u root -ppwd --database=enketo < /var/www/enketo/devinfo/database/languages.sql
 mysql -u root -ppwd --database=enketo < /var/www/enketo/devinfo/database/properties.sql
 mysql -u root -ppwd --database=enketo < /var/www/enketo/devinfo/database/surveys.sql
-git submodule init
-git submodule update
+git submodule update --init --recursive
 
 echo "init and update the submodules for enketo-core"
 cd public/lib/enketo-core
-git submodule init
-git submodule update
+git submodule update --init --recursive
 cd /var/www/enketo
 
 #temp fix for missing column
@@ -28,6 +30,9 @@ cp /shared_folder/vagrant-formhub/puppet/templates/enketo.php /var/www/enketo/Co
 cp /shared_folder/vagrant-formhub/puppet/templates/database.php /var/www/enketo/Code_Igniter/application/config/database.php
 cp /shared_folder/vagrant-formhub/puppet/templates/config.php /var/www/enketo/Code_Igniter/application/config/config.php
 echo "127.0.0.1       enketo.formhub.localhost" >> /etc/hosts
+
+npm install -g bower
+bower install --allow-root --config.interactive=false
 
 npm install -g grunt-cli
 npm install
