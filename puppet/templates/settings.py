@@ -10,6 +10,8 @@ import os
 import subprocess
 import sys
 
+from django.core.exceptions import SuspiciousOperation
+
 from pymongo import MongoClient
 
 
@@ -27,6 +29,17 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 MANAGERS = ADMINS
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'formhub',
+        'USER': 'admin',
+        'PASSWORD': 'pwd',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -49,6 +62,9 @@ LANGUAGES = (
     ('es', u'Español'),
     ('it', u'Italiano'),
     ('km', u'ភាសាខ្មែរ'),
+    ('ne', u'नेपाली'),
+    ('nl', u'Nederlands'),
+    ('zh', u'中文'),
 )
 
 SITE_ID = 1
@@ -240,6 +256,24 @@ AUTHENTICATION_BACKENDS = (
 # Settings for Django Registration
 ACCOUNT_ACTIVATION_DAYS = 1
 
+
+def skip_suspicious_operations(record):
+    """Prevent django from sending 500 error
+    email notifications for SuspiciousOperation
+    events, since they are not true server errors,
+    especially when related to the ALLOWED_HOSTS
+    configuration
+
+    background and more information:
+    http://www.tiwoc.de/blog/2013/03/django-prevent-email-notification-on-suspiciousoperation/
+
+    """
+    if record.exc_info:
+        exc_value = record.exc_info[1]
+        if isinstance(exc_value, SuspiciousOperation):
+            return False
+    return True
+
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error.
@@ -260,12 +294,17 @@ LOGGING = {
     'filters': {
         'require_debug_false': {
             '()': 'django.utils.log.RequireDebugFalse'
-        }
+        },
+        # Define filter for suspicious urls
+        'skip_suspicious_operations': {
+            '()': 'django.utils.log.CallbackFilter',
+            'callback': skip_suspicious_operations,
+        },
     },
     'handlers': {
         'mail_admins': {
             'level': 'ERROR',
-            'filters': ['require_debug_false'],
+            'filters': ['require_debug_false', 'skip_suspicious_operations'],
             'class': 'django.utils.log.AdminEmailHandler'
         },
         'console': {
@@ -338,20 +377,12 @@ DEFAULT_CONTENT_LENGTH = 10000000
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = ['--with-fixture-bundling']
-#NOSE_PLUGINS = [
-#    'utils.nose_plugins.SilenceSouth'
-#]
 
 # re-captcha in registrations
 REGISTRATION_REQUIRE_CAPTCHA = False
 RECAPTCHA_USE_SSL = False
 RECAPTCHA_PRIVATE_KEY = ''
 RECAPTCHA_PUBLIC_KEY = '6Ld52OMSAAAAAJJ4W-0TFDTgbznnWWFf0XuOSaB6'
-
-try:  # legacy setting for old sites who still use a local_settings.py file and have not updated to presets/
-    from local_settings import *
-except ImportError:
-    pass
 
 # MongoDB
 if MONGO_DATABASE.get('USER') and MONGO_DATABASE.get('PASSWORD'):
@@ -363,3 +394,7 @@ else:
 MONGO_CONNECTION = MongoClient(
     MONGO_CONNECTION_URL, safe=True, j=True, tz_aware=True)
 MONGO_DB = MONGO_CONNECTION[MONGO_DATABASE['NAME']]
+
+# this is rather pointless, currently, given the state of the tests
+# however, some functions require its being defined
+TESTING_MODE = False

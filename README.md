@@ -26,10 +26,8 @@ Virtual OS: Ubuntu 12.04 (Precise) x64, with Packages:
 ## Guide:  
 1. Download and install software from Requirements  
 2. Create a folder named 'formhubapp/' and clone this repository (formhubapp/vagrant-formhub).  
-3. Clone / copy in the formhub repo and datasets  
-    - clone 'formhub' github repository into 'formhubapp/formhub/' directory
-4. Run terminal, go into 'formhubapp/vagrant-formhub/', and execute the command 'vagrant up'. This will download the base box of ubuntu (~35MB), and bring up the formhub vm
-5. Install dnsmasq on your local machine nameserver
+3. Run terminal, go into 'formhubapp/vagrant-formhub/', and execute the command 'vagrant up'. This will download the base box of ubuntu (~35MB), and bring up the formhub vm
+4. Install dnsmasq on your local machine nameserver
 
     **ubuntu**
 
@@ -60,8 +58,8 @@ Virtual OS: Ubuntu 12.04 (Precise) x64, with Packages:
         - 192.168.50.5				*.enketo.formhub.localhost
     - restart Acrylic Service from control panel
         
-6. View Formhub: http://formhub.localhost/
-7. View Enketo: https://enketo.formhub.localhost/
+5. View Formhub: http://formhub.localhost/
+6. View Enketo: https://enketo.formhub.localhost/
 
 ## Working with the vagrant:
 - "vagrant up" starts the virtual machine

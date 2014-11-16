@@ -3,17 +3,16 @@
 a2enmod expires
 a2enmod ssl
 cd /var/www/
-#rm -rf enketo/ ; git clone https://github.com/twineapp/enketo.git
 rm -rf enketo/ ; git clone https://github.com/enketo/enketo-legacy.git
 mv enketo-legacy enketo
 
 cd enketo
-#mysql -u root -ppwd -e "drop database enketo";
+mysql -u root -ppwd -e "drop database enketo";
 mysql -u root -ppwd -e "create database enketo";
 mysql -u root -ppwd --database=enketo < /shared_folder/vagrant-formhub/src/sql-enketo/instances.sql
-mysql -u root -ppwd --database=enketo < /var/www/enketo/devinfo/database/languages.sql
-mysql -u root -ppwd --database=enketo < /var/www/enketo/devinfo/database/properties.sql
-mysql -u root -ppwd --database=enketo < /var/www/enketo/devinfo/database/surveys.sql
+mysql -u root -ppwd --database=enketo < /shared_folder/vagrant-formhub/src/sql-enketo/languages.sql
+mysql -u root -ppwd --database=enketo < /shared_folder/vagrant-formhub/src/sql-enketo/properties.sql
+mysql -u root -ppwd --database=enketo < /shared_folder/vagrant-formhub/src/sql-enketo/surveys.sql
 git submodule update --init --recursive
 
 echo "init and update the submodules for enketo-core"
