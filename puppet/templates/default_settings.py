@@ -8,6 +8,9 @@ from staging_example import *  # get most settings from staging_example.py (whic
 
 # # # now override the settings which came from staging # # # #
 
+DEBUG = True
+SERVER_EXTERNAL_URL = "http://formhub.localhost/" # replace this with *your* domain or ip
+
 # choose a different database...
 # sqlite
 #DATABASES = {

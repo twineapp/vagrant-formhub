@@ -42,15 +42,7 @@ class mongo
             command => 'echo "extension=mongo.so" >> /etc/php5/apache2/php.ini',
             require => Exec['pecl-mongo-install'],
     }
-    
-    exec
-    {
-        "wget-rockmongo":
-            command => 'wget http://rockmongo.com/release/rockmongo-1.1.5.zip -O /tmp/rockmongo-1.1.5.zip',
-            timeout => 3600,
-            creates =>  "/tmp/rockmongo-1.1.5.zip",
-    }
-    
+        
     package 
     { 
         "unzip":
@@ -61,9 +53,9 @@ class mongo
     exec
     {
         "unzip-rockmongo":
-            command => 'unzip -o /tmp/rockmongo-1.1.5.zip -d /var/www/',
+            command => 'unzip -o /shared_folder/vagrant-formhub/src/packages/rockmongo-1.1.5.zip -d /var/www/',
             timeout => 3600,
-            require => [ Exec['wget-rockmongo'], Package["unzip"] ]
+            require => [ Package["unzip"] ]
     }
     
 }

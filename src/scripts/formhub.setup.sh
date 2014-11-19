@@ -2,10 +2,9 @@
 
 echo "Formhub: Make directory structure and clone formhub:"
 cd /var/www
-rm -rf formhub/ ; git clone https://github.com/twineapp/formhub.git
+rm -rf formhub/ ; git clone https://github.com/SEL-Columbia/formhub.git
 cd formhub
-git submodule init
-git submodule update
+git submodule update --init --recursive
 
 echo "Formhub: Install requirements:"
 pip install numpy  --use-mirrors
@@ -19,6 +18,7 @@ sudo ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib/
 echo "Formhub: Create a database and start server:"
 cp /shared_folder/vagrant-formhub/puppet/templates/settings.py /var/www/formhub/formhub/settings.py
 cp /shared_folder/vagrant-formhub/puppet/templates/default_settings.py /var/www/formhub/formhub/preset/default_settings.py
+#sudo -u postgres psql -c "drop database formhub;"
 sudo -u postgres psql -c "create database formhub;"
 sudo -u postgres psql -c "grant all privileges on database formhub to admin;"
 python manage.py syncdb --noinput
