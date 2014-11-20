@@ -2,7 +2,7 @@
 
 echo "Formhub: Make directory structure and clone formhub:"
 cd /var/www
-rm -rf formhub/ ; git clone https://github.com/SEL-Columbia/formhub.git
+rm -rf formhub/ ; git clone https://github.com/twineapp/formhub.git
 cd formhub
 git submodule update --init --recursive
 
